@@ -21,6 +21,10 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
+app.get('/style.css', function(request, response) {
+	response.sendFile(path.join(__dirname + '/style.css'));
+});
+
 app.get('/', function(request, response) {
 	response.sendFile(path.join(__dirname + '/index.html'));
 });
@@ -51,11 +55,10 @@ app.post('/auth', function(request, response) {
 });
 
 app.get('/getGame', (req, res) => {
-    con.connect(function(err) {
+
+    con.query("SELECT * FROM game", function (err, result, fields) {
         if (err) throw err;
-        con.query("SELECT * FROM game", function (err, result, fields) {
-          if (err) throw err;
-          res.send(result);
-        });
-    });
+        res.send(result);
+	});
+	
 });
