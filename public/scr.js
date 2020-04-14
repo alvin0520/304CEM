@@ -2,21 +2,8 @@ const app = document.getElementById('root');
 
 const container = document.createElement('div');
 container.setAttribute('class', 'container');
-const container2 = document.createElement('div');
-container2.setAttribute('class', 'collapse navbar-collapse');
-app.appendChild(container2);
 app.appendChild(container);
-const ul = document.createElement('ul');
-ul.setAttribute('class','navbar-nav ml-auto mt-2 mt-lg-0');
-container2.appendChild(ul);
-const li = document.createElement('li');
-li.setAttribute('class','nav-item active');
-ul.appendChild(li);
-const btn = document.createElement('a');
-btn.innerText = "AdminLogin";
-btn.setAttribute('class','nav-link');
-btn.setAttribute('href','/Login');
-li.appendChild(btn);
+
 
 var request = new XMLHttpRequest();
 request.open('GET', 'http://localhost:3000/getGame', true);

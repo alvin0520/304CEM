@@ -59,10 +59,10 @@ request.onload = function () {
             hidd.setAttribute("name","id");
             hidd.setAttribute("value",game.id);
             form.appendChild(hidd);
-            const imgbtn = document.createElement("input");
+            const imgbtn = document.createElement("button");
             imgbtn.setAttribute("type","submit");
-            imgbtn.setAttribute("value"," ");
-            imgbtn.setAttribute("style",'background:url(https://unpkg.com/@icon/dripicons/icons/document-delete.svg) no-repeat;border:none;')
+            imgbtn.setAttribute("class",'btn btn-danger')
+            imgbtn.innerHTML = "Delete"
             form.appendChild(imgbtn);
             
 
@@ -74,10 +74,10 @@ request.onload = function () {
             hidd2.setAttribute("name","id");
             hidd2.setAttribute("value",game.id);
             form2.appendChild(hidd2);
-            const imgbtn2 = document.createElement("input");
+            const imgbtn2 = document.createElement("button");
             imgbtn2.setAttribute("type","submit");
-            imgbtn2.setAttribute("value"," ");
-            imgbtn2.setAttribute("style",'background:url(https://unpkg.com/@icon/dripicons/icons/document-edit.svg) no-repeat;border:none;')
+            imgbtn2.setAttribute("class",'btn btn-info')
+            imgbtn2.innerHTML = "Modify"
             form2.appendChild(imgbtn2);
 
 

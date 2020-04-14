@@ -80,10 +80,10 @@ var Pid;
 app.post('/modify', (req, res) => {
 	const id = req.body.id;
 	Pid = id;
-	res.redirect("/modify2");
+	res.redirect("/modify");
 });
 
-app.get('/modify2', function(req, res) {
+app.get('/modify', function(req, res) {
 	res.render(__dirname + "/Modify.html", {id:Pid});
 });
 
