@@ -20,19 +20,26 @@ app.use(session({
 }));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
-
-app.get('/style.css', function(request, response) {
-	response.sendFile(path.join(__dirname + '/style.css'));
-});
+app.use(express.static('public'))
+app.engine('html', require('ejs').renderFile); 
 
 app.get('/', function(request, response) {
 	response.sendFile(path.join(__dirname + '/index.html'));
 });
 app.get('/home', function(request, response) {
-	response.sendFile(path.join(__dirname + '/home.html'));
+	if (request.session.loggedin) {
+		response.sendFile(path.join(__dirname + '/home.html'));
+	} else {
+		response.send('Please login to view this page!');
+		response.end();
+	}
+	
 });
 app.get('/index', function(request, response) {
 	response.sendFile(path.join(__dirname + '/index.html'));
+});
+app.get('/Login', function(request, response) {
+	response.sendFile(path.join(__dirname + '/Login.html'));
 });
 app.post('/auth', function(request, response) {
 	var username = request.body.user;
@@ -55,10 +62,48 @@ app.post('/auth', function(request, response) {
 });
 
 app.get('/getGame', (req, res) => {
-
     con.query("SELECT * FROM game", function (err, result, fields) {
         if (err) throw err;
         res.send(result);
 	});
-	
+});
+
+app.post('/delete', (req, res) => {
+	const id = req.body.id;
+	con.query(`DELETE FROM game WHERE id = ${id}`, function (err, result, fields) {
+		if (err) throw err;
+		res.sendFile(path.join(__dirname + '/home.html'));
+	});
+});
+
+var Pid;
+app.post('/modify', (req, res) => {
+	const id = req.body.id;
+	Pid = id;
+	res.redirect("/modify2");
+});
+
+app.get('/modify2', function(req, res) {
+	res.render(__dirname + "/Modify.html", {id:Pid});
+});
+
+app.post('/Modi', (req, res) => {
+	const id = req.body.id;
+	const title = req.body.Title;
+	const Desc = req.body.Description;
+	con.query(`UPDATE game SET name = '${title}' , description = '${Desc}' WHERE id = ${id}`, function (err, result, fields) {
+		if (err) throw err;
+		res.redirect("/home");
+	});
+});
+app.post('/CreateGame', (req, res) => {
+	const title = req.body.Title;
+	const Desc = req.body.Description;
+	con.query(`INSERT INTO game (name, description) VALUES ('${title}' , '${Desc}')`, function (err, result, fields) {
+		if (err) throw err;
+		res.redirect("/home");
+	});
+});
+app.get('/Create', function(req, res) {
+	res.render(__dirname + "/Create.html", {id:Pid});
 });

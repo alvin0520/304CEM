@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Modify Game Info</title>
+
+	</head>
+	<body>
+		<div class="Modify-form">
+			<h1>Modify the Game Information</h1>
+			<form action="Modi" method="POST">
+				Title : <input type="text" name="Title" id="Title" required><br><br>
+                Description : <br><textarea name="Description" id="Description" rows="5" cols="100" required></textarea><br><br>
+                <input type="hidden" value="<%= id %>" id="id" name="id"/>
+				<input type="submit" value="submit">
+			</form>
+        </div>
+        
+        <script src="scr3.js"></script>
+	</body>
+</html>

@@ -9,53 +9,15 @@
   
   <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet">
   <link href="style.css" type="text/css" rel="stylesheet">
-
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
   <div id="root"></div>
-
-  <script>
-      const app = document.getElementById('root');
-
-      const container = document.createElement('div');
-      container.setAttribute('class', 'container');
-
-      app.appendChild(container);
-
-      var request = new XMLHttpRequest();
-      request.open('GET', 'http://localhost:3000/getGame', true);
-      request.onload = function () {
-
-        // Begin accessing JSON data here
-        var data = JSON.parse(this.response);
-        if (request.status >= 200 && request.status < 400) {
-          data.forEach(game => {
-            const card = document.createElement('div');
-            card.setAttribute('class', 'card');
-
-            const h2 = document.createElement('h2');
-            h2.textContent = game.name;
-
-            const p = document.createElement('p');
-            game.description = game.description.substring(0, 300);
-            p.textContent = `${game.description}...`;
-
-            container.appendChild(card);
-            card.appendChild(h2);
-            card.appendChild(p);
-          });
-        } else {
-          const errorMessage = document.createElement('marquee');
-          errorMessage.textContent = `Gah, it's not working!`;
-          app.appendChild(errorMessage);
-        }
-      }
-
-      request.send();
-
-  </script>
+  <script src="scr.js"></script>
 </body>
 
 </html>
